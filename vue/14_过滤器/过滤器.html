@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>过滤器</title>
+<!-- 引入Vue -->
+<script type="text/javascript"  src="../js/vue.js"></script>
+<!-- 注意导入dayjs -->
+<script type="text/javascript"  src="../js/dayjs.min.js"></script>
+</head>
+<body>
+  <div id="root">
+   <h2>显示格式化后的时间</h2>
+   <!-- 计算属性的方法名不加括号 ，methods得方法名加括号-->
+   <h3>现在是：{{fmtTime}}</h3>
+   <!-- methods方法实现方法名加括号 -->
+   <h3>现在是：{{getFmtTime()}}</h3>
+   <!-- 过滤器实现 -->
+   <h3>现在是：{{time | timeFormate}}</h3>
+  </div>
+</body>
+<script type="text/javascript">
+   Vue.config.productionTip = false;//阻止VUe启动时生成生产提示
+   new Vue({
+     el:'#root',
+     data:{
+       time:1649061738656//时间戳
+     },
+     computed: {
+       fmtTime(){
+         return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss')
+       }
+     },
+     methods: {
+       getFmtTime(){
+         return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss')
+       }
+     },
+     filters: {
+       timeFormate(value){
+         
+        return dayjs(value).format('YYYY年MM月DD日 HH:mm:ss')
+       }
+     }
+   })
+   
+</script>
+</html>

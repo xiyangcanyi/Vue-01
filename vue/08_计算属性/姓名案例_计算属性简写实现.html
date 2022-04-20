@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>姓名案例_计算属性简写实现</title>
+<!-- 引入Vue -->
+<script type="text/javascript"  src="../js/vue.js"></script>
+
+</head>
+<body>
+  <!-- 计算属性
+对于Vue来说，data里的配置项就是属性 。
+
+而计算属性，就是拿着写完的属性去加工计算，生成一个全新的属性。
+
+计算属性直接被挂载到vm上，直接读取使用即可（_data里面没有计算属性）。 -->
+  <div id="root">
+   姓：<input type="text" v-model="firstname"><br/>
+   名：<input type="text" v-model="lastname"><br/>
+   姓名：<span>{{fullname}}</span>
+
+  </div>
+</body>
+<script type="text/javascript">
+  Vue.config.productionTip = false; //阻止VUe启动时生成生产提示
+  const vm=new Vue({
+    el: "#root",
+    data: {
+      firstname: '张',
+      lastname: '三',
+    },
+    computed: {
+      // fullname:{
+      //   //当有人读取fullname时，get就会被调用，且返回值作为fullnam的值
+      //   //初次读取fullnam时被调用，所依赖的数据发生变化时被调用
+      //   get(){
+      //       console.log('get被调用了');
+      //       return this.firstname+'-'+this.lastname;
+      //   },
+      //   //当fullname被修改时
+      //   set(value){
+      //     console.log('set',value);
+      //     const arr=value.split('-')
+      //     this.firstname=arr[0]
+      //     this.lastname=arr[1]
+      //   }
+      // }
+      fullname(){
+        console.log('get被调用了');
+        return this.firstname+'-'+this.lastname;
+      }
+    }
+  })
+  console.log(vm);
+</script>
+
+</html>

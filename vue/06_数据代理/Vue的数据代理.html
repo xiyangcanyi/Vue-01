@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue的数据代理</title>
+<!-- 引入Vue -->
+<script type="text/javascript"  src="../js/vue.js"></script>
+
+</head>
+<body>
+  <div id="root">
+    <h2>学校名称：{{_data.name}}</h2>
+    <h2>学校地址：{{_data.address}}</h2>
+
+  </div>
+</body>
+<script type="text/javascript">
+   Vue.config.productionTip = false;//阻止VUe启动时生成生产提示
+  const vm=new Vue({
+     el:'#root',
+     data:{
+       name:'尚硅谷1',
+       address:'宏福科技园'
+     }
+   })
+   console.log(vm)
+   
+</script>
+</html>

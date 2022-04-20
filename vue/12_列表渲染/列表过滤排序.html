@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>过滤排序</title>
+	<!-- 引入Vue -->
+	<script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+
+<body>
+	<!-- v-for指令:
+1.用于展示列表数据
+2.语法：v-for="(item, index) in xxx" :key=“yyy”
+3.可遍历：数组、对象、字符串（用的很少）、指定次数（用的很少） -->
+	<div id="root">
+		<!-- 遍历数组 -->
+		<h2>人员列表（遍历数组）</h2>
+
+
+		<input type="text" placeholder="请输入名字" v-model="keyWord">
+		<button @click="sortType=2">年龄升序</button>
+		<button @click="sortType=1">年龄降序</button>
+		<button @click="sortType=0">原顺序</button>
+		<ul>
+			<li v-for="(person,index) of filterPersons" :key="person.id">
+				{{person.name}}-{{person.age}}--{{person.sex}}
+				<input type="text" name="" id="">
+			</li>
+		</ul>
+
+	</div>
+</body>
+<script type="text/javascript">
+	Vue.config.productionTip = false; //阻止VUe启动时生成生产提示
+	new Vue({
+		el: '#root',
+		data: {
+			keyWord: '',
+			sortType: 0, //0原顺序，1降序，2是升序
+			persons: [{
+					id: '001',
+					name: '马冬梅',
+					age: 19,
+					sex: '女'
+				},
+				{
+					id: '002',
+					name: '周冬雨',
+					age: 18,
+					sex: '女'
+				},
+				{
+					id: '003',
+					name: '周杰伦',
+					age: 20,
+					sex: '男'
+				},
+				{
+					id: '004',
+					name: '温兆伦',
+					age: 22,
+					sex: '男'
+				}
+			],
+			//filterPersons: []
+
+		},
+		// watch实现:
+		//#region 
+		/*	watch: {
+			keyWord:{
+				immediate:true,
+        handler(val){
+				 this.filterPersons=this.persons.filter((p)=>{
+					return p.name.indexOf(val)!== -1//注意是indexOf不是indexof
+				})
+				}
+			}
+		}*/
+		//#endregion
+		//用computed实现
+		computed: {
+			filterPersons() {
+
+				const arr = this.persons.filter((p) => {
+					return p.name.indexOf(this.keyWord) !== -1 //注意是indexOf不是indexof
+				});
+				//判断一下是否需要排序
+				if (this.sortType) {
+					arr.sort((p1, p2) => {
+						//函数体
+						return this.sortType === 1 ? p2.age - p1.age : p1.age - p2.age
+
+					})
+				}
+				return arr;
+
+			}
+
+		}
+
+
+
+
+	})
+</script>
+
+</html>

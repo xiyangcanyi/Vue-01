@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>事件修饰符</title>
+  <!-- 引入Vue -->
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <style>
+    * {
+      margin-top: 20px;
+    }
+
+    .demo01 {
+
+      height: 50px;
+      background-color: aquamarine;
+
+    }
+    .box1{
+      padding: auto;
+      background-color: blanchedalmond;
+    }
+    .box2{
+      padding-top: 20px;
+      background-color: blueviolet;
+    }
+    .list{
+      width: 200px;
+      height: 200px;
+      background-color: burlywood;
+      overflow: auto;
+    }
+    li{
+      height: 100px;
+      
+    }
+  </style>
+
+</head>
+
+<body>
+  <!-- prevent
+
+阻止默认事件（常用）
+
+stop
+
+阻止事件冒泡（常用）
+
+once
+
+事件只触发一次（常用）
+
+capture
+
+使用事件的捕获模式
+
+self
+
+只有event.target是当前操作的元素时才触发事件
+ passive
+
+先执行默认行为，后执行回调函数-->
+  <div id="root">
+    <h2>欢迎来打{{name}}学习</h2>
+    <!-- 
+     阻止默认事件（常用） -->
+    <a href="http://www.atguigu.com" @click.prevent="showInfo">点我提示信息</a>
+    <!-- 阻止事件冒泡（常用）修饰符小技巧：事件修饰符可以连着写 -->
+    <div class="demo01" @click="showInfo">
+      <button @click.stop="showInfo">点我提示信息</button>
+    </div>
+    <!-- 事件只触发一次（常用） -->
+    <button @click.once="showInfo">点我提示信息</button>
+    <!-- 使用事件的捕获模式 -->
+    <div class="box1" @click.capture="showMsg(1)">
+      div1
+      <div class="box2" @click="showMsg(2)">  <!-- 没加输出1,2，加了输出2,1 -->
+          div2
+      </div>
+  </div>
+  <!-- 只有event.target是当前操作的元素时才触发事件 -->
+  <div class="demo01" @click.self="showInfo">
+    <button @click="showInfo">点我提示信息</button>
+  </div>
+  <!-- 先执行默认行为，后执行回调函数-->
+  <ul @wheel.passive="demo" class="list">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+  </ul>
+
+  </div>
+</body>
+<script type="text/javascript">
+  Vue.config.productionTip = false; //阻止VUe启动时生成生产提示
+  new Vue({
+    el: '#root',
+    data: {
+      name: "尚硅谷"
+
+    },
+    methods: {
+      showInfo(event) {
+        // event.preventDefault()
+        //event.stopPropagation()
+        alert("同学你好")
+        //console.log(event.target);
+        
+      },
+      showMsg(msg){
+        //alert("同学你好")
+        console.log(msg);
+      },
+      demo(){
+        //console.log('@');
+        // for(let index=0;index<10000;index++){
+        //   console.log('#');
+        // }
+        console.log('累坏了');
+      },
+    }
+  })
+</script>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>数据绑定</title>
+<!-- 引入Vue -->
+<script type="text/javascript"  src="../js/vue.js"></script>
+
+</head>
+<body>
+  <div id="root">
+   <!-- 单向数据绑定：<input type="text" v-bind:value="name"><br>
+   双向数据绑定：<input type="text" v-model:value="name"> -->
+   <!-- 以下代码是错误的v-model用于表单元素的value双向绑定 -->
+   <!-- <div v-model:x="hello"></div> -->
+
+   单向数据绑定：<input type="text" :value="name"><br>
+   双向数据绑定：<input type="text" v-model="name">
+   <!-- 1.4.2. 单向数据绑定
+1. 语法：v-bind:href ="xxx" 或简写为 :href
+2. 特点：数据只能从 data 流向页面
+1.4.3. 双向数据绑定
+1. 语法：v-mode:value="xxx" 或简写为 v-model="xxx"
+2. 特点：数据不仅能从 data 流向页面，还能从页面流向 data -->
+
+  </div>
+</body>
+<script type="text/javascript">
+   Vue.config.productionTip = false;
+   new Vue({
+     el:'#root',
+     data:{
+       name:'赵耀鹏'
+     }
+   })
+   
+</script>
+</html>

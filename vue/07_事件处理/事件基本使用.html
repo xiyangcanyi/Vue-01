@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>事件基本使用</title>
+<!-- 引入Vue -->
+<script type="text/javascript"  src="../js/vue.js"></script>
+
+</head>
+<body>
+  <!-- 
+    事件的基本使用
+使用 v-on:xxx 或 @xxx 绑定事件，其中xxx是事件名；
+
+事件的回调需要配置在methods对象中,最终会再vm上；
+
+methods中配置的函数，不要用箭头函数！否则this就不是vm了而是window；
+
+methods中配置的函数，都是被Vue所管理的函数，this的指向是vm 或 组件实例对象；
+
+@click="demo" 和 @click="demo($event)" 效果一致，前者默认参数就是事件对象，后者要用$event才能生成事件对象，并且可以传多个参数；
+
+<button @click=“demo”>点我提示信息
+
+<button @click=“showInfo(66)”>点我提示信息
+
+<button @click=“showInfo(66,$event)”>点我提示信息
+   -->
+
+  <div id="root">
+   <h2>欢迎来到{{name}}学习</h2>
+   <button v-on:click="showInfo1">点我提示信息(不传参)</button>
+   <button @click="showInfo2(67,$event)">点我提示信息（传参）</button>
+  </div>
+</body>
+<script type="text/javascript">
+   Vue.config.productionTip = false;//阻止VUe启动时生成生产提示
+   const vm=new Vue({
+      el:'#root',
+      data:{
+        name:"尚硅谷"
+      },
+      methods: {
+        showInfo1(event){
+         // console.log(event.target.innerText)
+          //console.log(this)此处的this是vm
+          alert("同学你好1")
+        },
+        showInfo2(number,event){
+          //console.log(event.target.innerText)
+          //console.log(this)此处的this是vm
+          alert("同学你好!!")
+          console.log(number,event)
+        }
+        
+      }
+   })
+   console.log(vm)
+   
+</script>
+</html>

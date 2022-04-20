@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>v-once指令</title>
+<!-- 引入Vue -->
+<script type="text/javascript"  src="../js/vue.js"></script>
+
+</head>
+<body>
+  <!-- 准备好一个容器 -->
+  <div id="root">
+    <!-- v-once指令只用于除此更新渲染，就视为静态内容了，以后数据改变不会引起更新 -->
+    <h2 v-once>初始化的n值是:{{n}}</h2>
+   <h2>当前的n值是:{{n}}</h2>
+   <button @click="n++">点我n++</button>
+
+  </div>
+</body>
+<script type="text/javascript">
+   Vue.config.productionTip = false;//阻止VUe启动时生成生产提示
+   new Vue({
+     el:'#root',
+     data:{
+       n:1,
+     }
+   })
+</script>
+</html>

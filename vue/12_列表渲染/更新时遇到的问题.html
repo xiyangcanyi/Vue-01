@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>更新时遇到的问题</title>
+	<!-- 引入Vue -->
+	<script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+
+<body>
+	<!-- v-for指令:
+1.用于展示列表数据
+2.语法：v-for="(item, index) in xxx" :key=“yyy”
+3.可遍历：数组、对象、字符串（用的很少）、指定次数（用的很少） -->
+	<div id="root">
+		<!-- 遍历数组 -->
+		<h2>人员列表</h2>
+
+
+		<!-- <input type="text" placeholder="请输入名字" v-model="keyWord"> -->
+		<button @click="updateMei">更新马冬梅的信息</button>
+	
+		<ul>
+			<li v-for="(person,index) of persons" :key="person.id">
+				{{person.name}}-{{person.age}}--{{person.sex}}
+			
+			</li>
+		</ul>
+
+	</div>
+</body>
+<script type="text/javascript">
+	Vue.config.productionTip = false; //阻止VUe启动时生成生产提示
+	const vm=new Vue({
+		el: '#root',
+		data: {
+			keyWord: '',
+			sortType: 0, //0原顺序，1降序，2是升序
+			persons: [{
+					id: '001',
+					name: '马冬梅',
+					age: 19,
+					sex: '女'
+				},
+				{
+					id: '002',
+					name: '周冬雨',
+					age: 18,
+					sex: '女'
+				},
+				{
+					id: '003',
+					name: '周杰伦',
+					age: 20,
+					sex: '男'
+				},
+				{
+					id: '004',
+					name: '温兆伦',
+					age: 22,
+					sex: '男'
+				}
+			],
+			//filterPersons: []
+
+		},
+		methods:{
+			updateMei(){
+				//可以修改
+				/*this.persons[0].name='马老师'
+				this.persons[0].age=50
+				this.persons[0].sex='男'*/
+				//无效更新
+				// this.persons[0]={
+				// 	id: '001',
+				// 	name: '马老师',
+				// 	age: 50,
+				// 	sex: '男'
+				// }
+				this.persons.splice(0,1,{
+					id: '001',
+					name: '马老师',
+					age: 50,
+					sex: '男'
+				})
+		},
+	}
+
+	})
+</script>
+
+</html>
