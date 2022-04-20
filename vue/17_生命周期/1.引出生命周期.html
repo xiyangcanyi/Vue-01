@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>引出生命周期</title>
+<!-- 引入Vue -->
+<script type="text/javascript"  src="../js/vue.js"></script>
+
+</head>
+<body>
+  <!-- 生命周期：又名生命周期函数
+  是Vue在关键时刻帮我们调用的特殊名称的函数
+生命周期函数不可更改，函数的内容是程序员要求编写的。
+生命周期的this函数指向的是vm或者组件实例对象 -->
+<!-- 准备好一个容器 -->
+  <div id="root">
+    <h2 :style="{opacity}">欢迎学习Vue</h2>
+
+
+  </div>
+</body>
+<script type="text/javascript">
+   Vue.config.productionTip = false;//阻止VUe启动时生成生产提示
+  //  const vm=
+   new Vue({
+     el:'#root',
+     data:{
+      opacity:1
+     },
+     methods: {
+    
+     },
+     //Vue完成模板的解析并把初始的真实dom元素放入页面后（挂在完毕调用mounted
+     mounted () {
+       console.log('mounted');
+       setInterval(()=>{
+          this.opacity-=0.01
+          if(this.opacity<=0)
+          this.opacity=1
+       })
+     }
+  
+   })
+  //  <!-- 通过外部定时器实现（不推荐） -->
+  //  setInterval(()=>{
+  //   vm.opacity-=0.01;
+  //   if(vm.opacity<=0)
+  //    vm.opacity=1;
+  //  },16)
+</script>
+</html>
